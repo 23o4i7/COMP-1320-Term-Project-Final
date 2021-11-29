@@ -1,10 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Create DevCard</title>
+</head>
+<body>
+    <h2>Create your DevCard</h2>
+    <form action="http://localhost:8007/people/homepage" method="post">
+        <input id="fullName" placeholder="Full Name" type="text" name="name"><br><br>
+        <h3>Technologies You Know:</h3><br>
+        <input id="HTML" type="checkbox" name="HTML">
+        <label>HTML</label><br><br>
+        <input id="CSS" type="checkbox" name="CSS">
+        <label>CSS</label><br><br>
+        <input id="JS" type="checkbox" name="JS">
+        <label>JS</label><br><br>
+        <input id="git" type="checkbox" name="git">
+        <label>Git</label><br><br>
+        <input id="react" type="checkbox" name="react">
+        <label>React</label><br><br>
+        <input id="nodejs" type="checkbox" name="nodejs">
+        <label>Node.js</label><br><br>
+        <input id="githubURL" placeholder="GitHub URL" type="text" name="github"><br><br>
+        <input id="TwitterURL" placeholder="Twitter URL" type="text"name="twitter"><br><br>
+        <input id="favoriteBooks" placeholder="Favorite Books (Seperate by comma)" type="text" name="books"><br><br>
+        <input id="favoriteArtists" placeholder="Favorite Artists (Seperate by comma)" type="text" name="artists"><br><br>
+        <input type="submit" value="Create Site">
+      </form>
+</body>
 </html>
