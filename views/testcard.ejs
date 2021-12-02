@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>DevCard</title>
+    <style>
+        :root {
+        font-size: 16px;
+        line-height: 1.5;
+        --primary-blue: #233975;
+        }
+
+        h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        }
+
+        h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        }
+
+        h3 {
+        text-align: center;
+        }
+
+        .small {
+        font-size: 80%;
+        text-align: center;
+        }
+
+        .split-screen {
+        display: flex;
+        flex-direction: column;
+        }
+
+        .left {
+        height: 200px;
+        background: black;
+        }
+
+        .left,
+        .right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .left .copy {
+        color: white;
+        text-align: center;
+        -webkit-font-smoothing: antialiased;
+        }
+
+        .left p {
+        font-weight: 400;
+        }
+
+        .right .copy {
+        color: black;
+        text-align: center;
+        }
+
+        .right .copy p {
+        margin: 1.5em 0;
+        font-size: 0.875rem;
+        }
+
+        .right form {
+        width: 328px;
+        }
+
+        form input[type="text"] {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 8px;
+        border: 1px solid #c4c4c4;
+        padding: 1em;
+        margin-bottom: 1.25rem;
+        font-size: 0.875rem;
+        }
+
+        form input[type="checkbox"] {
+        margin-right: 10px;
+        }
+
+        @media screen and (min-width: 900px) {
+        .split-screen {
+            flex-direction: row;
+            height: 100vh;
+        }
+        .left,
+        .right {
+            display: flex;
+            width: 50%;
+            height: auto;
+        }
+        }
+
+        .checkboxes {
+        column-count: 2;
+        column-width: 50%;
+        column-rule: none;
+        width: 100%;
+        }
+
+        .myLabel {
+        display: inline-block;
+        width: 213px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="split-screen">
+      <div class="left">
+        <section class="copy">
+          <h1>DevCard</h1>
+          <p>Your personal digital portfolio</p>
+        </section>
+      </div>
+      <div class="right">
+        <form action="http://localhost:8007/54az3" method="post">
+          <section class="copy">
+            <h2>Create your DevCard</h2>
+          </section>
+          <div class="input-container name">
+            <input type="text" name="fname" placeholder="Your Full Name" />
+          </div>
+          <div class="input-container name">
+            <input type="text" name="aboutMe" placeholder="About Me" />
+          </div>
+          <h2>Technologies You Know</h2>
+          <div class="checkboxes">
+            <label class="myLabel">
+              <input type="checkbox" name="skills" value="HTML" />
+              HTML
+            </label>
+            <label class="myLabel">
+              <input type="checkbox" name="skills" value="CSS" />
+              CSS
+            </label>
+            <label class="myLabel">
+              <input type="checkbox" name="skills" value="JS" />
+              JS
+            </label>
+            <label class="myLabel">
+              <input type="checkbox" name="skills" value="Git" />
+              Git
+            </label>
+            <label class="myLabel">
+              <input type="checkbox" name="skills" value="React" />
+              React
+            </label>
+            <label class="myLabel">
+              <input type="checkbox" name="skills" value="NodeJS" />
+              Node.JS
+            </label>
+          </div>
+          <div class="input-container name">
+            <input type="text" name="githubURL" placeholder="Github URL" />
+          </div>
+          <div class="input-container name">
+            <input type="text" name="twitterURL" placeholder="Twitter URL" />
+          </div>
+          <div class="input-container name">
+            <input
+              type="text"
+              name="favouriteBooks"
+              placeholder="Favourite Books"
+            />
+          </div>
+
+          <button class="signup-btn" type="submit">Create Site</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
