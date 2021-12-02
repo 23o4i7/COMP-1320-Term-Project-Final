@@ -7,37 +7,47 @@ const fsP = require("fs").promises;
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-app.post("/people/homepage", (req, res) => {
-  res.render("homepage");
-});
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.render("createcard")
-})
-
-// app.post("/", (req, res) => {
-//   res.render("homepage")
-// })
-
-// app.post("/create", (req, res) => {
-//   const user = req.body;
-//   fsP.readFile("database.json", "utf-8")
-//     .then((content) => JSON.parse(content))
-//     .then(jsonObj)
-// })
-
-app.post("/people/:id", (req, res) => {
-  const id = "54az3"; // Get ID from URL
-  fsP.readFile("database.json", "utf-8")
-    .then()// Find matching database from .json
+  res.render("createcard");
 });
 
-app.post(`/people/:id`, (req, res) => {
+app.get("/people/:id", (req, res) => {
   res.render("people");
 });
 
-app.post("/:id/photos", (req, res) => {
+// app.get("/createuser", (req, res) => {
+//   res.render("people");
+//   const idObj = '{"id": "testuser"}';
+//   fsP.readFile("database.json", "utf-8")
+//     .then(content => JSON.parse(content))
+//     .then(parsedContent => JSON.stringify(parsedContent))
+//     .then(jsonString => `${jsonString.substring(0, (jsonString.length - 2))},\n${idObj}]}`)
+//     .then(data => fsP.writeFile("database.json", data))
+// });
+
+app.post("/54az3", (req, res) => {
+  res.render("homepage");
+  const inputData = req.body;
+  const userObj = JSON.stringify({
+    id: "12345", // generate random string
+    fullName: inputData["name"],
+    aboutMe: inputData["about"],
+    knownTechnologies: Object.keys(inputData).slice(2, -4),
+    githubUrl: inputData["github"],
+    twitterUrl: inputData["twitter"],
+    favoriteBooks: inputData["books"].split(","),
+    favoriteArtists: inputData["artists"].split(",")
+  });
+  fsP.readFile("database.json", "utf-8")
+    .then(content => JSON.parse(content))
+    .then(parsedContent => JSON.stringify(parsedContent))
+    .then(jsonString => `${jsonString.substring(0, (jsonString.length - 2))},\n${userObj}]}`)
+    .then(data => fsP.writeFile("database.json", data))
+});
+
+app.get("/:id/photos", (req, res) => {
   const id = req.params.id;
 });
 
