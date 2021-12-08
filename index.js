@@ -28,23 +28,23 @@ app.get("/people/:id", (req, res) => {
 // });
 
 app.post("/54az3", (req, res) => {
-  res.render("homepage");
   const inputData = req.body;
-  const userObj = JSON.stringify({
-    id: "12345", // generate random string
-    fullName: inputData["name"],
-    aboutMe: inputData["about"],
-    knownTechnologies: Object.keys(inputData).slice(2, -4),
-    githubUrl: inputData["github"],
-    twitterUrl: inputData["twitter"],
-    favoriteBooks: inputData["books"].split(","),
-    favoriteArtists: inputData["artists"].split(",")
-  });
-  fsP.readFile("database.json", "utf-8")
-    .then(content => JSON.parse(content))
-    .then(parsedContent => JSON.stringify(parsedContent))
-    .then(jsonString => `${jsonString.substring(0, (jsonString.length - 2))},\n${userObj}]}`)
-    .then(data => fsP.writeFile("database.json", data))
+  const userObj = {
+    id: generateID(),
+    fullName: inputData["fullName"],
+    aboutMe: inputData["aboutMe"], //(inputData["aboutMe"].split(". ")).map(sentence => sentence + "."),
+    knownTechnologies: Object.keys(inputData).slice(2, -3),
+    githubUrl: inputData["githubUrl"],
+    twitterUrl: inputData["twitterUrl"],
+    favoriteBooks: inputData["favoriteBooks"].split(", "), // Seperate author and title
+  };
+  console.log(userObj)
+  res.render("homepage", { userObj: userObj });
+  // fsP.readFile("database.json", "utf-8")
+  //   .then(content => JSON.parse(content))
+  //   .then(parsedContent => JSON.stringify(parsedContent))
+  //   .then(jsonString => `${jsonString.substring(0, (jsonString.length - 2))},\n${JSON.stringify(userObj)}]}`)
+  //   .then(data => fsP.writeFile("database.json", data))
 });
 
 app.get("/:id/photos", (req, res) => {
@@ -54,3 +54,12 @@ app.get("/:id/photos", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server now is running at http://localhost:${PORT} 🚀`);
 });
+
+const generateID = () => {
+  let id = "";
+  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  for (let index = 0; index < 5; index++) {
+    id += characters.charAt(Math.floor(Math.random()*characters.length));
+  }
+  return id;
+}
