@@ -23,13 +23,12 @@
                     <div class="has-dflex-center bs-md pic">
                       <img
                         src="https://github.com/luxonauta.png"
-                        alt="Armaan"
+                        alt="<%= userObj["fullName"].split(" ")[0] %>"
                       />
                     </div>
                     <div class="infos">
                       <span
-                        ><i class="fas fa-user-circle"></i>&nbsp;&nbsp;Armaan
-                        Dhanji</span
+                        ><i class="fas fa-user-circle"></i>&nbsp;&nbsp;<%= userObj["fullName"] %></span
                       ><span
                         ><i class="fas fa-briefcase"></i>&nbsp;&nbsp;Full Stack
                         Developer</span
@@ -48,17 +47,17 @@
                 </div>
                 <div class="lx-card">
                   <div class="lx-row">
-                    <h1 class="title">Connect with Armaan</h1>
+                    <h1 class="title">Connect with <%= userObj["fullName"].split(" ")[0] %></h1>
                     <div class="mini-cards">
                       <a
                         class="has-dflex-center bs-md"
-                        href="https://github.com/adhanji8"
+                        href=<%= userObj["githubUrl"] %>
                         target="_blank"
                         rel="noopener noreferrer"
                         ><i class="fab fa-github-alt"></i></a
                       ><a
                         class="has-dflex-center bs-md"
-                        href="https://www.twitter.com/bcit"
+                        href=<%= userObj["twitterUrl"] %>
                         target="_blank"
                         rel="noopener noreferrer"
                         ><i class="fab fa-twitter"></i
@@ -72,7 +71,7 @@
               <div class="lx-row">
                 <div class="lx-row lx-card">
                   <h1 class="title">
-                    <i class="fas fa-info-circle"></i>&nbsp;Welcome to Armaan's
+                    <i class="fas fa-info-circle"></i>&nbsp;Welcome to <%= userObj["fullName"].split(" ")[0] %>'s
                     corner of the Internet
                   </h1>
                 </div>
@@ -81,16 +80,7 @@
                     <i class="fas fa-hand-point-right"></i>&nbsp;About me
                   </h1>
                   <div class="text">
-                    <p>
-                      Hi, my name is&nbsp;<b>Armaan Dhanji</b>, but I'm better
-                      known by my nickname&nbsp;<i>@armaand</i>, and I'm a
-                      teacher in the School of Computing at BCIT.
-                    </p>
-                    <p>
-                      I&nbsp;&nbsp;<i class="fas fa-heart"></i>&nbsp; to code
-                      full-stack projects, always looking for innovative ways to
-                      write code that follows practices!
-                    </p>
+                    <%= userObj["aboutMe"] %> 
                   </div>
                 </div>
                 <div class="lx-row lx-card">
@@ -98,27 +88,36 @@
                     <i class="fas fa-terminal"></i>&nbsp;Technologies
                   </h1>
                   <div class="mini-cards">
-                    <span class="has-dflex-center bs-md" title="CSS"
-                      ><i class="fab fa-css3-alt"></i></span
-                    ><span class="has-dflex-center bs-md" title="HTML"
-                      ><i class="fab fa-html5"></i></span
-                    ><span class="has-dflex-center bs-md" title="JS"
-                      ><i class="fab fa-js"></i></span
-                    ><span class="has-dflex-center bs-md" title="Sass"
-                      ><i class="fab fa-sass"></i></span
-                    ><span class="has-dflex-center bs-md" title="Git"
-                      ><i class="fab fa-git-alt"></i></span
-                    ><span class="has-dflex-center bs-md" title="Gulp"
-                      ><i class="fab fa-gulp"></i></span
-                    ><span class="has-dflex-center bs-md" title="Node JS"
-                      ><i class="fab fa-node-js"></i></span
-                    ><span class="has-dflex-center bs-md" title="NPM"
-                      ><i class="fab fa-npm"></i></span
-                    ><span class="has-dflex-center bs-md" title="PHP"
-                      ><i class="fab fa-php"></i></span
-                    ><span class="has-dflex-center bs-md" title="React"
-                      ><i class="fab fa-react"></i
-                    ></span>
+                    <% if (userObj["knownTechnologies"].includes("HTML")) { %>
+                      <span class="has-dflex-center bs-md" title="HTML"><i class="fab fa-html5"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("CSS")) { %>
+                      <span class="has-dflex-center bs-md" title="CSS"><i class="fab fa-css3-alt"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("Sass")) { %>
+                      <span class="has-dflex-center bs-md" title="Sass"><i class="fab fa-sass"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("JS")) { %>
+                      <span class="has-dflex-center bs-md" title="JS"><i class="fab fa-js"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("Node JS")) { %>
+                      <span class="has-dflex-center bs-md" title="Node JS"><i class="fab fa-node-js"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("React")) { %>
+                      <span class="has-dflex-center bs-md" title="React"><i class="fab fa-react"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("Gulp")) { %>
+                      <span class="has-dflex-center bs-md" title="Gulp"><i class="fab fa-gulp"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("Git")) { %>
+                      <span class="has-dflex-center bs-md" title="Git"><i class="fab fa-git-alt"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("NPM")) { %>
+                      <span class="has-dflex-center bs-md" title="NPM"><i class="fab fa-npm"></i></span>
+                    <% } %>
+                    <% if (userObj["knownTechnologies"].includes("PHP")) { %>
+                      <span class="has-dflex-center bs-md" title="PHP"><i class="fab fa-php"></i></span>
+                    <% } %>
                   </div>
                 </div>
                 <div class="lx-row lx-card">
@@ -127,28 +126,9 @@
                   </h1>
                   <div class="text">
                     <ol>
-                      <li>
-                        <p>
-                          <b>The Lord of the Rings</b>&nbsp;- J. R. R. Tolkien
-                        </p>
-                      </li>
-                      <li>
-                        <p><b>Foundation series</b>&nbsp;- Isaac Asimov</p>
-                      </li>
-                      <li>
-                        <p>
-                          <b>Cracking the Coding Interview</b>&nbsp;- Gayle
-                          Laakmann
-                        </p>
-                      </li>
-                      <li>
-                        <p><b>Clean Code</b>&nbsp;- Rob Martin</p>
-                      </li>
-                      <li>
-                        <p>
-                          <b>A Brief History of Time</b>&nbsp;- Stephen Hawking
-                        </p>
-                      </li>
+                      <% userObj["favoriteBooks"].forEach(book => { %>
+                        <li><p><b><%= book %>&nbsp;</b></p></li>
+                      <% }) %>
                     </ol>
                   </div>
                 </div>
