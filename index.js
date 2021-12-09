@@ -33,7 +33,7 @@ app.post("/createuser", (req, res) => {
     .then(parsedContent => JSON.stringify(parsedContent))
     .then(jsonString => `${jsonString.substring(0, (jsonString.length - 2))},\n${JSON.stringify(userObj)}]}`)
     .then(data => fsP.writeFile("database.json", data))
-    // fix this
+    // fix this 
     .then(
       fsP.readFile("database.json", "utf-8")
         .then(data => JSON.parse(data))
@@ -41,13 +41,13 @@ app.post("/createuser", (req, res) => {
         .then(userObj => res.render("homepage", { userObj: userObj }))
 )});
 
-app.post("/:id", (req, res) => {
-  const id = req.params.id;
-  fsP.readFile("database.json", "utf-8")
-  .then(data => JSON.parse(data))
-  .then(data => data["users"].filter(user => user.id == id)[0])
-  .then(userObj => res.render("homepage", { userObj: userObj }))
-});
+// app.post("/:id", (req, res) => {
+//   const id = req.params.id;
+//   fsP.readFile("database.json", "utf-8")
+//   .then(data => JSON.parse(data))
+//   .then(data => data["users"].filter(user => user.id == id)[0])
+//   .then(userObj => res.render("homepage", { userObj: userObj }))
+// });
 
 app.get("/:id/photos", (req, res) => {
   const id = req.params.id;
