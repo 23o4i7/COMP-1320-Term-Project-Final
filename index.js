@@ -13,38 +13,40 @@ app.get("/", (req, res) => {
   res.render("createcard");
 });
 
-app.get("/people/:id", (req, res) => {
+app.get("/people", (req, res) => {
   res.render("people");
 });
 
-// app.get("/createuser", (req, res) => {
-//   res.render("people");
-//   const idObj = '{"id": "testuser"}';
-//   fsP.readFile("database.json", "utf-8")
-//     .then(content => JSON.parse(content))
-//     .then(parsedContent => JSON.stringify(parsedContent))
-//     .then(jsonString => `${jsonString.substring(0, (jsonString.length - 2))},\n${idObj}]}`)
-//     .then(data => fsP.writeFile("database.json", data))
-// });
-
-app.post("/54az3", (req, res) => {
+app.post("/createuser", (req, res) => {
   const inputData = req.body;
   const userObj = {
-    id: generateID(),
+    id: 12345,//inputData["userID"],
     fullName: inputData["fullName"],
     aboutMe: inputData["aboutMe"], //(inputData["aboutMe"].split(". ")).map(sentence => sentence + "."),
     knownTechnologies: Object.keys(inputData).slice(2, -3),
     githubUrl: inputData["githubUrl"],
     twitterUrl: inputData["twitterUrl"],
-    favoriteBooks: inputData["favoriteBooks"].split(", "), // Seperate author and title
+    favoriteBooks: inputData["favoriteBooks"].split(", "), // Seperate author and title?
   };
-  console.log(userObj)
-  res.render("homepage", { userObj: userObj });
-  // fsP.readFile("database.json", "utf-8")
-  //   .then(content => JSON.parse(content))
-  //   .then(parsedContent => JSON.stringify(parsedContent))
-  //   .then(jsonString => `${jsonString.substring(0, (jsonString.length - 2))},\n${JSON.stringify(userObj)}]}`)
-  //   .then(data => fsP.writeFile("database.json", data))
+  fsP.readFile("database.json", "utf-8")
+    .then(content => JSON.parse(content))
+    .then(parsedContent => JSON.stringify(parsedContent))
+    .then(jsonString => `${jsonString.substring(0, (jsonString.length - 2))},\n${JSON.stringify(userObj)}]}`)
+    .then(data => fsP.writeFile("database.json", data))
+    // fix this
+    .then(
+      fsP.readFile("database.json", "utf-8")
+        .then(data => JSON.parse(data))
+        .then(data => data["users"].filter(user => user.id == userObj["id"])[0])
+        .then(userObj => res.render("homepage", { userObj: userObj }))
+)});
+
+app.post("/:id", (req, res) => {
+  const id = req.params.id;
+  fsP.readFile("database.json", "utf-8")
+  .then(data => JSON.parse(data))
+  .then(data => data["users"].filter(user => user.id == id)[0])
+  .then(userObj => res.render("homepage", { userObj: userObj }))
 });
 
 app.get("/:id/photos", (req, res) => {
@@ -54,12 +56,3 @@ app.get("/:id/photos", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server now is running at http://localhost:${PORT} 🚀`);
 });
-
-const generateID = () => {
-  let id = "";
-  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-  for (let index = 0; index < 5; index++) {
-    id += characters.charAt(Math.floor(Math.random()*characters.length));
-  }
-  return id;
-}
